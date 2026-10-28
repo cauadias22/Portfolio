@@ -1339,10 +1339,7 @@
   // ===================== ANO AUTOMÁTICO NO RODAPÉ =====================
   document.getElementById('anoAtual').textContent = new Date().getFullYear();
 
-  // ===================== FORMULÁRIO DE CONTATO (SEM BACKEND) =====================
-  // Este formulário é apenas visual. Ele valida os campos no navegador,
-  // mas NÃO envia mensagens de verdade até ser conectado a um serviço
-  // como Formspree, EmailJS, Web3Forms ou um backend próprio.
+  // ===================== FORMULÁRIO DE CONTATO VIA WHATSAPP =====================
   const formContato = document.getElementById('formContato');
   const formAviso = document.getElementById('formAviso');
 
@@ -1354,9 +1351,22 @@
       return;
     }
 
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mensagem = document.getElementById('mensagem').value.trim();
+    const texto = [
+      'Olá, Cauã! Vim pelo seu portfólio.',
+      '',
+      'Nome: ' + nome,
+      'E-mail: ' + email,
+      '',
+      'Mensagem: ' + mensagem
+    ].join('\\n');
+    const urlWhatsApp = 'https://wa.me/5527997196997?text=' + encodeURIComponent(texto);
+
+    window.open(urlWhatsApp, '_blank', 'noopener,noreferrer');
     formAviso.classList.add('visivel');
-    formAviso.textContent = 'Mensagem pronta para ser enviada! Conecte este formulário a um serviço (Formspree, EmailJS, etc.) para que ela chegue de verdade até você.';
-    formContato.reset();
+    formAviso.textContent = 'O WhatsApp foi aberto com sua mensagem. Revise e toque em Enviar para concluir.';
   });
 
   // ===================== BOTÕES DE PROJETO SEM LINK DEFINIDO =====================
