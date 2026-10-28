@@ -1077,7 +1077,7 @@
         <article class="card-projeto" id="projeto-2">
           <div class="projeto-preview">
             <span class="selo-demo">Projeto conceitual</span>
-            <img src="sistema-agendamento-preview.png" alt="Prévia do sistema Corte Perfeito" style="width:100%;height:100%;object-fit:cover;">
+            <img src="sistema-agendamento-preview-v2.png" alt="Prévia do sistema Corte Perfeito" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="projeto-info">
             <span class="projeto-categoria">Desenvolvimento de Sistemas</span>
@@ -1238,7 +1238,7 @@
           <label for="mensagem">Mensagem</label>
           <textarea id="mensagem" name="mensagem" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primario" style="width:100%;">Enviar mensagem</button>
+        <button type="submit" class="btn btn-primario" style="width:100%;">Enviar mensagem</button>\n        <p style="font-size:0.78rem;color:var(--texto-suave);text-align:center;margin-top:12px;">Sua mensagem será enviada para cauadias.dev@gmail.com.</p>
         <p class="form-aviso" id="formAviso">Este formulário ainda não está conectado a um serviço de envio real. Para recebê-lo por e-mail, conecte-o a um serviço como Formspree, EmailJS ou um backend próprio.</p>
       </form>
     </div>
@@ -1339,13 +1339,13 @@
   // ===================== ANO AUTOMÁTICO NO RODAPÉ =====================
   document.getElementById('anoAtual').textContent = new Date().getFullYear();
 
-  // ===================== FORMULÁRIO DE CONTATO VIA WHATSAPP =====================
+  // ===================== ENVIO DE MENSAGENS POR E-MAIL =====================
   const formContato = document.getElementById('formContato');
   const formAviso = document.getElementById('formAviso');
+  const botaoEnvio = formContato.querySelector('button[type="submit"]');
 
-  formContato.addEventListener('submit', function(evento){
+  formContato.addEventListener('submit', async function(evento){
     evento.preventDefault();
-
     if(!formContato.checkValidity()){
       formContato.reportValidity();
       return;
@@ -1354,19 +1354,34 @@
     const nome = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
     const mensagem = document.getElementById('mensagem').value.trim();
-    const texto = [
-      'Olá, Cauã! Vim pelo seu portfólio.',
-      '',
-      'Nome: ' + nome,
-      'E-mail: ' + email,
-      '',
-      'Mensagem: ' + mensagem
-    ].join('\n');
-    const urlWhatsApp = 'https://wa.me/5527997196997?text=' + encodeURIComponent(texto);
-
-    window.open(urlWhatsApp, '_blank', 'noopener,noreferrer');
+    botaoEnvio.disabled = true;
+    botaoEnvio.textContent = 'Enviando...';
     formAviso.classList.add('visivel');
-    formAviso.textContent = 'O WhatsApp foi aberto com sua mensagem. Revise e toque em Enviar para concluir.';
+    formAviso.textContent = 'Enviando sua mensagem...';
+
+    try {
+      const resposta = await fetch('https://formsubmit.co/ajax/cauadias.dev@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: nome,
+          email: email,
+          message: mensagem,
+          _subject: 'Nova mensagem pelo portfólio',
+          _template: 'table',
+          _url: window.location.href
+        })
+      });
+      const resultado = await resposta.json();
+      if (!resposta.ok || !resultado.success) throw new Error('Não foi possível enviar agora.');
+      formAviso.textContent = 'Mensagem enviada! Obrigado pelo contato.';
+      formContato.reset();
+    } catch (erro) {
+      formAviso.textContent = 'Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.';
+    } finally {
+      botaoEnvio.disabled = false;
+      botaoEnvio.textContent = 'Enviar mensagem';
+    }
   });
 
   // ===================== BOTÕES DE PROJETO SEM LINK DEFINIDO =====================
