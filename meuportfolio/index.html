@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cauã | Desenvolvedor Web &amp; Soluções Digitais</title>
+<meta name="description" content="Sites profissionais, sistemas e estratégias digitais para ajudar empresas a fortalecer a presença online e atender melhor os clientes.">
+
+<style>
+  /* ============================
+     1. VARIÁVEIS E BASE
+  ============================ */
+  :root{
+    --azul-principal: #2563EB;
+    --azul-escuro: #0B1F3A;
+    --azul-secundario: #3B82F6;
+    --azul-claro: #DBEAFE;
+    --fundo: #F8FAFC;
+    --branco: #FFFFFF;
+    --texto: #172033;
+    --texto-suave: #4B5768;
+    --sombra: 0 10px 30px rgba(11, 31, 58, 0.08);
+    --sombra-hover: 0 18px 40px rgba(37, 99, 235, 0.18);
+    --raio: 16px;
+    --transicao: all 0.3s ease;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+    background:var(--fundo);
+    color:var(--texto);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  img{max-width:100%;display:block;}
+
+  a{text-decoration:none;color:inherit;}
+
+  ul{list-style:none;}
+
+  button{font-family:inherit;cursor:pointer;border:none;}
+
+  .container{
+    width:100%;
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  section{padding:100px 0;}
+
+  .secao-titulo{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 60px;
+  }
+
+  .secao-titulo h2{
+    font-size:clamp(1.8rem, 3vw, 2.4rem);
+    color:var(--azul-escuro);
+    margin-bottom:14px;
+    font-weight:700;
+  }
+
+  .secao-titulo p{
+    color:var(--texto-suave);
+    font-size:1.05rem;
+  }
+
+  .tag{
+    display:inline-block;
+    background:var(--azul-claro);
+    color:var(--azul-principal);
+    font-size:0.78rem;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:6px 16px;
+    border-radius:100px;
+    margin-bottom:16px;
+  }
+
+  /* Foco visível para acessibilidade */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible{
+    outline:3px solid var(--azul-secundario);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .sr-only{
+    position:absolute;
+    width:1px;height:1px;
+    padding:0;margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+
+  /* ============================
+     2. BOTÕES
+  ============================ */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:14px 28px;
+    border-radius:10px;
+    font-weight:600;
+    font-size:0.95rem;
+    transition:var(--transicao);
+    white-space:nowrap;
+  }
+
+  .btn-primario{
+    background:linear-gradient(135deg, var(--azul-principal), var(--azul-secundario));
+    color:var(--branco);
+    box-shadow:0 8px 20px rgba(37,99,235,0.3);
+  }
+
+  .btn-primario:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 28px rgba(37,99,235,0.38);
+  }
+
+  .btn-secundario{
+    background:var(--branco);
+    color:var(--azul-principal);
+    border:2px solid var(--azul-claro);
+  }
+
+  .btn-secundario:hover{
+    border-color:var(--azul-principal);
+    transform:translateY(-3px);
+  }
+
+  .btn-outline-claro{
+    background:transparent;
+    color:var(--branco);
+    border:2px solid rgba(255,255,255,0.4);
+  }
+  .btn-outline-claro:hover{
+    background:rgba(255,255,255,0.1);
+    border-color:var(--branco);
+  }
+
+  /* ============================
+     3. CABEÇALHO
+  ============================ */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:1000;
+    background:rgba(248,250,252,0.85);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(11,31,58,0.06);
+    transition:var(--transicao);
+  }
+
+  .header-conteudo{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:78px;
+  }
+
+  .logo{
+    font-size:1.3rem;
+    font-weight:800;
+    color:var(--azul-escuro);
+    letter-spacing:-0.02em;
+  }
+
+  .logo span{color:var(--azul-principal);}
+
+  nav ul{
+    display:flex;
+    gap:38px;
+    align-items:center;
+  }
+
+  nav a:not(.btn){
+    font-weight:600;
+    font-size:0.95rem;
+    color:var(--texto);
+    position:relative;
+    padding:6px 0;
+    transition:var(--transicao);
+  }
+
+  nav a:not(.btn)::after{
+    content:'';
+    position:absolute;
+    bottom:0;left:0;
+    width:0;height:2px;
+    background:var(--azul-principal);
+    transition:var(--transicao);
+  }
+
+  nav a:not(.btn):hover::after,
+  nav a:not(.btn).ativo::after{
+    width:100%;
+  }
+
+  nav a:not(.btn):hover{color:var(--azul-principal);}
+
+  .menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    background:none;
+    padding:6px;
+    z-index:1100;
+  }
+
+  .menu-toggle span{
+    width:26px;height:3px;
+    background:var(--azul-escuro);
+    border-radius:4px;
+    transition:var(--transicao);
+  }
+
+  .menu-toggle.ativo span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+  .menu-toggle.ativo span:nth-child(2){opacity:0;}
+  .menu-toggle.ativo span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+
+  /* ============================
+     4. HERO
+  ============================ */
+  .hero{
+    padding:168px 0 110px;
+    background:
+      radial-gradient(circle at 85% 10%, rgba(37,99,235,0.10), transparent 45%),
+      radial-gradient(circle at 10% 90%, rgba(59,130,246,0.08), transparent 40%),
+      var(--fundo);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:60px;
+    align-items:center;
+  }
+
+  .hero-texto h1{
+    font-size:clamp(2.2rem, 4.2vw, 3.3rem);
+    font-weight:800;
+    color:var(--azul-escuro);
+    line-height:1.18;
+    letter-spacing:-0.02em;
+    margin-bottom:22px;
+  }
+
+  .hero-texto h1 em{
+    font-style:normal;
+    background:linear-gradient(135deg, var(--azul-principal), var(--azul-secundario));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .hero-texto p{
+    font-size:1.1rem;
+    color:var(--texto-suave);
+    max-width:520px;
+    margin-bottom:34px;
+  }
+
+  .hero-botoes{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+  }
+
+  .hero-mini-stats{
+    display:flex;
+    gap:34px;
+    flex-wrap:wrap;
+  }
+
+  .hero-mini-stats div strong{
+    display:block;
+    font-size:1.5rem;
+    color:var(--azul-escuro);
+    font-weight:800;
+  }
+  .hero-mini-stats div span{
+    font-size:0.85rem;
+    color:var(--texto-suave);
+  }
+
+  /* Composição visual do hero: "janela de navegador" estilizada */
+  .hero-visual{
+    position:relative;
+    height:420px;
+  }
+
+  .browser-card{
+    position:absolute;
+    background:var(--branco);
+    border-radius:var(--raio);
+    box-shadow:var(--sombra);
+    overflow:hidden;
+    border:1px solid rgba(11,31,58,0.05);
+  }
+
+  .browser-card.principal{
+    width:88%;
+    top:10px;
+    left:0;
+    z-index:3;
+  }
+
+  .browser-card.secundario{
+    width:62%;
+    bottom:0;
+    right:0;
+    z-index:2;
+    opacity:0.96;
+  }
+
+  .browser-topo{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:12px 14px;
+    background:var(--fundo);
+    border-bottom:1px solid rgba(11,31,58,0.06);
+  }
+
+  .browser-topo .bolinha{
+    width:9px;height:9px;border-radius:50%;
+    background:#CBD5E1;
+  }
+  .browser-topo .bolinha:nth-child(1){background:#FCA5A5;}
+  .browser-topo .bolinha:nth-child(2){background:#FDE68A;}
+  .browser-topo .bolinha:nth-child(3){background:#86EFAC;}
+
+  .browser-barra{
+    margin-left:10px;
+    flex:1;
+    height:18px;
+    background:var(--branco);
+    border-radius:6px;
+    border:1px solid rgba(11,31,58,0.06);
+  }
+
+  .browser-corpo{padding:18px;}
+
+  .linha-skeleton{
+    height:10px;
+    border-radius:6px;
+    background:var(--azul-claro);
+    margin-bottom:10px;
+  }
+  .linha-skeleton.curta{width:40%;}
+  .linha-skeleton.media{width:70%;}
+  .linha-skeleton.cheia{width:100%;}
+
+  .bloco-destaque{
+    margin-top:16px;
+    height:70px;
+    border-radius:10px;
+    background:linear-gradient(135deg, var(--azul-principal), var(--azul-secundario));
+  }
+
+  .mini-cards-visual{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:16px;
+  }
+  .mini-cards-visual div{
+    height:46px;
+    border-radius:8px;
+    background:var(--azul-claro);
+  }
+
+  .orbita{
+    position:absolute;
+    width:16px;height:16px;
+    border-radius:50%;
+    background:var(--azul-principal);
+    box-shadow:0 0 0 6px rgba(37,99,235,0.15);
+    animation:flutuar 4s ease-in-out infinite;
+  }
+  .orbita.o1{top:0;right:14%;animation-delay:0s;}
+  .orbita.o2{bottom:18%;left:4%;width:10px;height:10px;animation-delay:1.2s;background:var(--azul-secundario);}
+
+  @keyframes flutuar{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-14px);}
+  }
+
+  /* ============================
+     5. SERVIÇOS
+  ============================ */
+  .servicos{background:var(--branco);}
+
+  .grid-servicos{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:24px;
+  }
+
+  .card-servico{
+    background:var(--fundo);
+    border:1px solid rgba(11,31,58,0.06);
+    border-radius:var(--raio);
+    padding:32px 26px;
+    transition:var(--transicao);
+  }
+
+  .card-servico:hover{
+    transform:translateY(-8px);
+    box-shadow:var(--sombra-hover);
+    border-color:transparent;
+    background:var(--branco);
+  }
+
+  .icone-servico{
+    width:52px;height:52px;
+    border-radius:14px;
+    background:linear-gradient(135deg, var(--azul-principal), var(--azul-secundario));
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:20px;
+    box-shadow:0 8px 18px rgba(37,99,235,0.25);
+  }
+
+  .icone-servico svg{width:24px;height:24px;stroke:var(--branco);}
+
+  .card-servico h3{
+    font-size:1.12rem;
+    color:var(--azul-escuro);
+    margin-bottom:10px;
+    font-weight:700;
+  }
+
+  .card-servico p{
+    color:var(--texto-suave);
+    font-size:0.93rem;
+    margin-bottom:20px;
+  }
+
+  .link-servico{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-weight:700;
+    font-size:0.88rem;
+    color:var(--azul-principal);
+    transition:var(--transicao);
+  }
+  .link-servico svg{width:14px;height:14px;transition:var(--transicao);}
+  .link-servico:hover svg{transform:translateX(4px);}
+
+  /* ============================
+     6. PROJETOS
+  ============================ */
+  .grid-projetos{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:28px;
+  }
+
+  .card-projeto{
+    background:var(--branco);
+    border-radius:var(--raio);
+    overflow:hidden;
+    box-shadow:var(--sombra);
+    transition:var(--transicao);
+    border:1px solid rgba(11,31,58,0.05);
+  }
+
+  .card-projeto:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--sombra-hover);
+  }
+
+  .projeto-preview{
+    height:200px;
+    background:linear-gradient(135deg, var(--azul-escuro), var(--azul-principal));
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .projeto-preview svg{width:64px;height:64px;stroke:rgba(255,255,255,0.85);}
+
+  .selo-demo{
+    position:absolute;
+    top:14px;right:14px;
+    background:rgba(255,255,255,0.92);
+    color:var(--azul-escuro);
+    font-size:0.72rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    padding:5px 12px;
+    border-radius:100px;
+  }
+
+  .projeto-info{padding:26px;}
+
+  .projeto-categoria{
+    font-size:0.76rem;
+    font-weight:700;
+    color:var(--azul-principal);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:8px;
+    display:block;
+  }
+
+  .projeto-info h3{
+    font-size:1.2rem;
+    color:var(--azul-escuro);
+    margin-bottom:10px;
+    font-weight:700;
+  }
+
+  .projeto-info p{
+    color:var(--texto-suave);
+    font-size:0.92rem;
+    margin-bottom:16px;
+  }
+
+  .tecnologias{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+
+  .tecnologias span{
+    font-size:0.75rem;
+    font-weight:600;
+    background:var(--azul-claro);
+    color:var(--azul-principal);
+    padding:4px 10px;
+    border-radius:100px;
+  }
+
+  .btn-projeto{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-weight:700;
+    font-size:0.9rem;
+    color:var(--azul-principal);
+    border-bottom:2px solid var(--azul-claro);
+    padding-bottom:3px;
+    transition:var(--transicao);
+  }
+  .btn-projeto:hover{border-color:var(--azul-principal);}
+
+  /* ============================
+     7. DIFERENCIAIS
+  ============================ */
+  .diferenciais{background:var(--azul-escuro);color:var(--branco);position:relative;overflow:hidden;}
+
+  .diferenciais::before{
+    content:'';
+    position:absolute;
+    top:-120px;right:-120px;
+    width:380px;height:380px;
+    background:radial-gradient(circle, rgba(37,99,235,0.35), transparent 70%);
+  }
+
+  .diferenciais .secao-titulo h2{color:var(--branco);}
+  .diferenciais .secao-titulo p{color:rgba(255,255,255,0.65);}
+
+  .grid-diferenciais{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+    position:relative;
+    z-index:1;
+  }
+
+  .item-diferencial{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:var(--raio);
+    padding:28px 22px;
+    transition:var(--transicao);
+  }
+
+  .item-diferencial:hover{
+    background:rgba(255,255,255,0.09);
+    transform:translateY(-6px);
+  }
+
+  .item-diferencial .icone-servico{
+    background:rgba(255,255,255,0.1);
+    box-shadow:none;
+  }
+
+  .item-diferencial h3{
+    font-size:1rem;
+    margin-bottom:8px;
+    font-weight:700;
+  }
+
+  .item-diferencial p{
+    font-size:0.88rem;
+    color:rgba(255,255,255,0.65);
+  }
+
+  /* ============================
+     8. SOBRE MIM
+  ============================ */
+  .sobre{background:var(--branco);}
+
+  .sobre-grid{
+    display:grid;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:60px;
+    align-items:center;
+  }
+
+  .foto-wrapper{
+    position:relative;
+  }
+
+  .foto-placeholder{
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:24px;
+    background:linear-gradient(135deg, var(--azul-claro), var(--fundo));
+    border:2px dashed var(--azul-secundario);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    color:var(--azul-principal);
+    text-align:center;
+    padding:20px;
+  }
+
+  .foto-placeholder svg{width:56px;height:56px;}
+  .foto-placeholder span{font-size:0.85rem;font-weight:600;max-width:200px;}
+
+  .foto-real{
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:24px;
+    object-fit:cover;
+    box-shadow:var(--sombra);
+    border:4px solid var(--branco);
+    outline:1px solid rgba(11,31,58,0.06);
+  }
+
+  .sobre-texto h2{
+    font-size:clamp(1.7rem,3vw,2.2rem);
+    color:var(--azul-escuro);
+    margin-bottom:18px;
+    font-weight:700;
+  }
+
+  .sobre-texto p{
+    color:var(--texto-suave);
+    margin-bottom:16px;
+  }
+
+  .sobre-skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:22px;
+  }
+
+  .sobre-skills span{
+    background:var(--azul-claro);
+    color:var(--azul-principal);
+    font-weight:700;
+    font-size:0.85rem;
+    padding:8px 16px;
+    border-radius:100px;
+  }
+
+  /* ============================
+     9. CONTATO
+  ============================ */
+  .contato{
+    background:
+      radial-gradient(circle at 15% 20%, rgba(37,99,235,0.07), transparent 45%),
+      var(--fundo);
+  }
+
+  .contato-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+  }
+
+  .contato-info h2{
+    font-size:clamp(1.7rem,3vw,2.2rem);
+    color:var(--azul-escuro);
+    margin-bottom:16px;
+    font-weight:700;
+  }
+
+  .contato-info > p{
+    color:var(--texto-suave);
+    margin-bottom:30px;
+  }
+
+  .contato-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:18px;
+    padding:14px 16px;
+    background:var(--branco);
+    border-radius:12px;
+    box-shadow:var(--sombra);
+    transition:var(--transicao);
+  }
+
+  .contato-item:hover{transform:translateX(6px);}
+
+  .contato-item .icone-mini{
+    width:40px;height:40px;
+    border-radius:10px;
+    background:var(--azul-claro);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .contato-item .icone-mini svg{width:20px;height:20px;stroke:var(--azul-principal);}
+
+  .contato-item strong{display:block;font-size:0.95rem;color:var(--azul-escuro);}
+  .contato-item span, .contato-item a{font-size:0.88rem;color:var(--texto-suave);}
+  .contato-item a:hover{color:var(--azul-principal);}
+
+  .form-contato{
+    background:var(--branco);
+    border-radius:var(--raio);
+    padding:36px;
+    box-shadow:var(--sombra);
+  }
+
+  .campo{margin-bottom:20px;}
+
+  .campo label{
+    display:block;
+    font-size:0.85rem;
+    font-weight:700;
+    color:var(--azul-escuro);
+    margin-bottom:8px;
+  }
+
+  .campo input, .campo textarea{
+    width:100%;
+    padding:13px 16px;
+    border:1.5px solid #E2E8F0;
+    border-radius:10px;
+    font-size:0.95rem;
+    font-family:inherit;
+    color:var(--texto);
+    transition:var(--transicao);
+    background:var(--fundo);
+  }
+
+  .campo input:focus, .campo textarea:focus{
+    border-color:var(--azul-principal);
+    outline:none;
+    background:var(--branco);
+  }
+
+  .campo textarea{resize:vertical;min-height:110px;}
+
+  .form-aviso{
+    font-size:0.8rem;
+    color:var(--texto-suave);
+    margin-top:14px;
+    text-align:center;
+    display:none;
+  }
+
+  .form-aviso.visivel{display:block;}
+
+  /* ============================
+     10. RODAPÉ
+  ============================ */
+  footer{
+    background:var(--azul-escuro);
+    color:rgba(255,255,255,0.75);
+    padding:54px 0 26px;
+  }
+
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:36px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+
+  .footer-marca .logo{color:var(--branco);margin-bottom:12px;}
+  .footer-marca .logo span{color:var(--azul-secundario);}
+  .footer-marca p{font-size:0.88rem;max-width:280px;}
+
+  .footer-coluna h4{
+    color:var(--branco);
+    font-size:0.95rem;
+    margin-bottom:16px;
+  }
+
+  .footer-coluna ul li{margin-bottom:10px;}
+  .footer-coluna a{font-size:0.88rem;transition:var(--transicao);}
+  .footer-coluna a:hover{color:var(--branco);}
+
+  .footer-baixo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    padding-top:24px;
+    font-size:0.8rem;
+  }
+
+  /* ============================
+     11. RESPONSIVO
+  ============================ */
+  @media (max-width: 960px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{height:320px;margin-top:20px;}
+    .grid-servicos{grid-template-columns:repeat(2,1fr);}
+    .grid-projetos{grid-template-columns:1fr;}
+    .grid-diferenciais{grid-template-columns:repeat(2,1fr);}
+    .sobre-grid{grid-template-columns:1fr;}
+    .foto-wrapper{max-width:320px;margin:0 auto;}
+    .contato-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+
+  @media (max-width: 720px){
+    section{padding:70px 0;}
+
+    .menu-toggle{display:flex;}
+
+    nav{
+      position:fixed;
+      top:0;right:0;
+      height:100vh;
+      width:min(78vw, 320px);
+      background:var(--branco);
+      box-shadow:-10px 0 40px rgba(11,31,58,0.15);
+      transform:translateX(100%);
+      transition:transform 0.35s ease;
+      z-index:1050;
+      padding:100px 32px 40px;
+    }
+
+    nav.aberto{transform:translateX(0);}
+
+    nav ul{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:26px;
+    }
+
+    nav ul li{width:100%;}
+
+    nav .btn{width:100%;margin-top:10px;}
+
+    .overlay-menu{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(11,31,58,0.45);
+      z-index:1040;
+    }
+    .overlay-menu.ativo{display:block;}
+
+    .hero{padding-top:140px;}
+    .hero-botoes{flex-direction:column;align-items:stretch;}
+    .hero-mini-stats{justify-content:space-between;}
+
+    .grid-servicos{grid-template-columns:1fr;}
+    .grid-diferenciais{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:30px;}
+    .footer-baixo{flex-direction:column;text-align:center;}
+    .form-contato{padding:26px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== CABEÇALHO ===================== -->
+<header>
+  <div class="container header-conteudo">
+    <a href="#inicio" class="logo">Cauã<span>.dev</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="menuPrincipal">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="menuPrincipal">
+      <ul>
+        <li><a href="#inicio" class="ativo">Início</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="#contato" class="btn btn-primario">Vamos conversar</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="overlay-menu" id="overlayMenu"></div>
+</header>
+
+<main>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-texto">
+        <span class="tag">Desenvolvimento Web &amp; Presença Digital</span>
+        <h1>Transformo <em>ideias</em> em soluções digitais para o seu negócio.</h1>
+        <p>Sites profissionais, sistemas e estratégias digitais para ajudar empresas a fortalecer sua presença online e atender melhor seus clientes.</p>
+
+        <div class="hero-botoes">
+          <a href="#projetos" class="btn btn-primario">Conhecer meus projetos</a>
+          <a href="#contato" class="btn btn-secundario">Solicitar orçamento</a>
+        </div>
+
+        <div class="hero-mini-stats">
+          <div><strong>4</strong><span>áreas de atuação</span></div>
+          <div><strong>100%</strong><span>responsivo</span></div>
+          <div><strong>Local</strong><span>foco em negócios da região</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="browser-card principal">
+          <div class="browser-topo">
+            <span class="bolinha"></span><span class="bolinha"></span><span class="bolinha"></span>
+            <div class="browser-barra"></div>
+          </div>
+          <div class="browser-corpo">
+            <div class="linha-skeleton curta"></div>
+            <div class="linha-skeleton cheia"></div>
+            <div class="linha-skeleton media"></div>
+            <div class="bloco-destaque"></div>
+          </div>
+        </div>
+
+        <div class="browser-card secundario">
+          <div class="browser-topo">
+            <span class="bolinha"></span><span class="bolinha"></span><span class="bolinha"></span>
+            <div class="browser-barra"></div>
+          </div>
+          <div class="browser-corpo">
+            <div class="linha-skeleton curta"></div>
+            <div class="mini-cards-visual">
+              <div></div><div></div>
+            </div>
+          </div>
+        </div>
+
+        <span class="orbita o1"></span>
+        <span class="orbita o2"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVIÇOS ===================== -->
+  <section class="servicos" id="servicos">
+    <div class="container">
+      <div class="secao-titulo">
+        <span class="tag">Serviços</span>
+        <h2>Como posso ajudar seu negócio?</h2>
+        <p>Soluções digitais pensadas para as necessidades da sua empresa.</p>
+      </div>
+
+      <div class="grid-servicos">
+
+        <div class="card-servico">
+          <div class="icone-servico">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 9h20"></path></svg>
+          </div>
+          <h3>Sites profissionais</h3>
+          <p>Sites modernos e responsivos para apresentar sua empresa, divulgar seus serviços e facilitar o contato com seus clientes.</p>
+          <a href="#projeto-1" class="link-servico">Ver projeto
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+
+        <div class="card-servico">
+          <div class="icone-servico">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+          </div>
+          <h3>Sistemas</h3>
+          <p>Protótipos e aplicações para organizar processos, gerenciar informações e tornar tarefas do dia a dia mais práticas.</p>
+          <a href="#projeto-2" class="link-servico">Ver projeto
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+
+        <div class="card-servico">
+          <div class="icone-servico">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-7-7 18-2.5-7.5L3 11z"></path></svg>
+          </div>
+          <h3>Anúncios digitais</h3>
+          <p>Planejamento de campanhas e criação de anúncios para divulgar negócios, alcançar públicos relevantes e gerar oportunidades.</p>
+          <a href="#projeto-3" class="link-servico">Ver projeto
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+
+        <div class="card-servico">
+          <div class="icone-servico">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <h3>Perfil da empresa no Google</h3>
+          <p>Organização e otimização da presença local da empresa no Google e no Google Maps.</p>
+          <a href="#projeto-4" class="link-servico">Ver projeto
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJETOS ===================== -->
+  <section class="projetos" id="projetos">
+    <div class="container">
+      <div class="secao-titulo">
+        <span class="tag">Portfólio</span>
+        <h2>Projetos selecionados</h2>
+        <p>Conheça algumas demonstrações das soluções que posso desenvolver para o seu negócio.</p>
+      </div>
+
+      <div class="grid-projetos">
+
+        <article class="card-projeto" id="projeto-1">
+          <div class="projeto-preview">
+            <span class="selo-demo">Demonstração</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 9h20M7 4v5"></path></svg>
+          </div>
+          <div class="projeto-info">
+            <span class="projeto-categoria">Desenvolvimento Web</span>
+            <h3>Landing Page</h3>
+            <p>Página de apresentação criada para mostrar como uma empresa local pode transmitir profissionalismo e facilitar o contato com clientes.</p>
+            <div class="tecnologias">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span>
+            </div>
+            <a href="#" class="btn-projeto" data-projeto="landing">Visualizar projeto
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="card-projeto" id="projeto-2">
+          <div class="projeto-preview">
+            <span class="selo-demo">Projeto conceitual</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 21V9"></path></svg>
+          </div>
+          <div class="projeto-info">
+            <span class="projeto-categoria">Desenvolvimento de Sistemas</span>
+            <h3>Sistema de Agendamentos</h3>
+            <p>Painel administrativo conceitual para gerenciar horários, clientes e serviços de um pequeno negócio de forma simples e organizada.</p>
+            <div class="tecnologias">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span>
+            </div>
+            <a href="#" class="btn-projeto" data-projeto="sistema">Ver demonstração
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="card-projeto" id="projeto-3">
+          <div class="projeto-preview">
+            <span class="selo-demo">Projeto conceitual</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-7-7 18-2.5-7.5L3 11z"></path></svg>
+          </div>
+          <div class="projeto-info">
+            <span class="projeto-categoria">Marketing Digital</span>
+            <h3>Campanha de Anúncios</h3>
+            <p>Estratégia e criativos pensados para divulgar um negócio local, alcançar o público certo e gerar novos contatos comerciais.</p>
+            <div class="tecnologias">
+              <span>Planejamento</span><span>Criativos</span>
+            </div>
+            <a href="#" class="btn-projeto" data-projeto="campanha">Conhecer estratégia
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="card-projeto" id="projeto-4">
+          <div class="projeto-preview">
+            <span class="selo-demo">Projeto conceitual</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div class="projeto-info">
+            <span class="projeto-categoria">SEO Local</span>
+            <h3>Perfil da Empresa no Google</h3>
+            <p>Análise e proposta de melhorias para a presença local de um negócio no Google e no Google Maps, facilitando ser encontrado por clientes.</p>
+            <div class="tecnologias">
+              <span>Google Meu Negócio</span><span>SEO Local</span>
+            </div>
+            <a href="#" class="btn-projeto" data-projeto="seo">Ver análise
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DIFERENCIAIS ===================== -->
+  <section class="diferenciais">
+    <div class="container">
+      <div class="secao-titulo">
+        <span class="tag" style="background:rgba(255,255,255,0.1);color:#DBEAFE;">Diferenciais</span>
+        <h2>Por que investir em uma presença digital profissional?</h2>
+      </div>
+
+      <div class="grid-diferenciais">
+        <div class="item-diferencial">
+          <div class="icone-servico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--branco)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg></div>
+          <h3>Design adaptado para celulares</h3>
+          <p>Layout moderno que funciona bem em qualquer tamanho de tela.</p>
+        </div>
+
+        <div class="item-diferencial">
+          <div class="icone-servico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--branco)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4l3 2"></path></svg></div>
+          <h3>Soluções sob medida</h3>
+          <p>Cada projeto é pensado para as necessidades reais do negócio.</p>
+        </div>
+
+        <div class="item-diferencial">
+          <div class="icone-servico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--branco)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.8 7.3L3 20l1.2-5.2A8.5 8.5 0 1 1 21 11.5z"></path></svg></div>
+          <h3>Comunicação clara</h3>
+          <p>Atendimento direto, sem termos técnicos complicados.</p>
+        </div>
+
+        <div class="item-diferencial">
+          <div class="icone-servico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--branco)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 14l4-4 3 3 5-6"></path></svg></div>
+          <h3>Foco em usabilidade</h3>
+          <p>Organização e presença digital pensadas para converter visitantes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE MIM ===================== -->
+  <section class="sobre" id="sobre">
+    <div class="container sobre-grid">
+      <div class="foto-wrapper">
+        <img src="foto-perfil.png" alt="Foto de Cauã, desenvolvedor web" class="foto-real">
+      </div>
+
+      <div class="sobre-texto">
+        <span class="tag">Sobre mim</span>
+        <h2>Tecnologia e criatividade a serviço do seu negócio.</h2>
+        <p>Sou desenvolvedor de soluções digitais e trabalho na criação de sites, sistemas e projetos de presença digital. Meu objetivo é ajudar empresas a apresentar melhor seus serviços e aproveitar as oportunidades do ambiente online.</p>
+        <p><em>[Espaço para adicionar sua trajetória: formação, cursos em andamento e experiências relevantes.]</em></p>
+
+        <div class="sobre-skills">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+          <span>Design responsivo</span>
+          <span>SEO local</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTATO ===================== -->
+  <section class="contato" id="contato">
+    <div class="container contato-grid">
+      <div class="contato-info">
+        <span class="tag">Contato</span>
+        <h2>Vamos tirar seu projeto do papel?</h2>
+        <p>Tem uma ideia ou quer melhorar a presença digital da sua empresa? Entre em contato para conversarmos sobre o que faz sentido para o seu negócio.</p>
+
+        <div class="contato-item">
+          <div class="icone-mini"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+          <div>
+            <strong>WhatsApp</strong>
+            <a href="https://wa.me/5527997196997" target="_blank" rel="noopener noreferrer">(55) 27 99719-6997</a>
+          </div>
+        </div>
+
+        <div class="contato-item">
+          <div class="icone-mini"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg></div>
+          <div>
+            <strong>E-mail</strong>
+            <a href="mailto:cauadias.dev@gmail.com">cauadias.dev@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contato-item">
+          <div class="icone-mini"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg></div>
+          <div>
+            <strong>Instagram</strong>
+            <a href="https://instagram.com/_caua.diasz" target="_blank" rel="noopener noreferrer">@_caua.diasz</a>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-contato" id="formContato" novalidate>
+        <div class="campo">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" required autocomplete="name">
+        </div>
+        <div class="campo">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="campo">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primario" style="width:100%;">Enviar mensagem</button>
+        <p class="form-aviso" id="formAviso">Este formulário ainda não está conectado a um serviço de envio real. Para recebê-lo por e-mail, conecte-o a um serviço como Formspree, EmailJS ou um backend próprio.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== RODAPÉ ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-marca">
+        <div class="logo">Cauã<span>.dev</span></div>
+        <p>Desenvolvimento de sites, sistemas e estratégias digitais para empresas e comércios locais.</p>
+      </div>
+
+      <div class="footer-coluna">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-coluna">
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="mailto:cauadias.dev@gmail.com">cauadias.dev@gmail.com</a></li>
+          <li><a href="https://wa.me/5527997196997" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="https://instagram.com/_caua.diasz" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-baixo">
+      <span>Cauã.dev — Soluções Digitais</span>
+      <span>&copy; <span id="anoAtual"></span> Todos os direitos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===================== MENU MOBILE =====================
+  const menuToggle = document.getElementById('menuToggle');
+  const menuPrincipal = document.getElementById('menuPrincipal');
+  const overlayMenu = document.getElementById('overlayMenu');
+
+  function abrirMenu(){
+    menuPrincipal.classList.add('aberto');
+    overlayMenu.classList.add('ativo');
+    menuToggle.classList.add('ativo');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function fecharMenu(){
+    menuPrincipal.classList.remove('aberto');
+    overlayMenu.classList.remove('ativo');
+    menuToggle.classList.remove('ativo');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  menuToggle.addEventListener('click', () => {
+    const estaAberto = menuPrincipal.classList.contains('aberto');
+    estaAberto ? fecharMenu() : abrirMenu();
+  });
+
+  overlayMenu.addEventListener('click', fecharMenu);
+
+  document.querySelectorAll('#menuPrincipal a').forEach(link => {
+    link.addEventListener('click', fecharMenu);
+  });
+
+  // ===================== DESTACAR LINK ATIVO AO ROLAR =====================
+  const secoesComId = document.querySelectorAll('main section[id]');
+  const linksNav = document.querySelectorAll('#menuPrincipal a:not(.btn)');
+
+  function atualizarLinkAtivo(){
+    let atual = secoesComId[0] ? secoesComId[0].id : '';
+    const posicaoScroll = window.scrollY + 120;
+
+    secoesComId.forEach(secao => {
+      if(posicaoScroll >= secao.offsetTop){
+        atual = secao.id;
+      }
+    });
+
+    linksNav.forEach(link => {
+      link.classList.toggle('ativo', link.getAttribute('href') === '#' + atual);
+    });
+  }
+
+  window.addEventListener('scroll', atualizarLinkAtivo);
+  atualizarLinkAtivo();
+
+  // ===================== ANO AUTOMÁTICO NO RODAPÉ =====================
+  document.getElementById('anoAtual').textContent = new Date().getFullYear();
+
+  // ===================== FORMULÁRIO DE CONTATO (SEM BACKEND) =====================
+  // Este formulário é apenas visual. Ele valida os campos no navegador,
+  // mas NÃO envia mensagens de verdade até ser conectado a um serviço
+  // como Formspree, EmailJS, Web3Forms ou um backend próprio.
+  const formContato = document.getElementById('formContato');
+  const formAviso = document.getElementById('formAviso');
+
+  formContato.addEventListener('submit', function(evento){
+    evento.preventDefault();
+
+    if(!formContato.checkValidity()){
+      formContato.reportValidity();
+      return;
+    }
+
+    formAviso.classList.add('visivel');
+    formAviso.textContent = 'Mensagem pronta para ser enviada! Conecte este formulário a um serviço (Formspree, EmailJS, etc.) para que ela chegue de verdade até você.';
+    formContato.reset();
+  });
+
+  // ===================== BOTÕES DE PROJETO SEM LINK DEFINIDO =====================
+  // Enquanto você não tiver os links reais dos projetos, estes botões
+  // avisam o visitante em vez de simular um link quebrado ("#").
+  document.querySelectorAll('.btn-projeto').forEach(botao => {
+    botao.addEventListener('click', function(evento){
+      if(this.getAttribute('href') === '#'){
+        evento.preventDefault();
+        alert('Em breve: link deste projeto. Substitua o atributo href por este botão no código (busque por data-projeto="' + this.dataset.projeto + '").');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
