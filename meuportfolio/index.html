@@ -906,6 +906,13 @@
     *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
     html{scroll-behavior:auto;}
   }
+  .portfolio-zoom{display:block;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:zoom-in;overflow:hidden}
+  .portfolio-zoom img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease}
+  .portfolio-zoom:hover img{transform:scale(1.035)}
+  .portfolio-lightbox{position:fixed;inset:0;z-index:3000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(10,10,12,.78);backdrop-filter:blur(5px)}
+  .portfolio-lightbox.aberto{display:flex}
+  .portfolio-lightbox img{max-width:min(900px,90vw);max-height:82vh;width:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+  .portfolio-lightbox-fechar{position:absolute;top:20px;right:24px;width:42px;height:42px;border-radius:50%;background:#fff;color:#172033;font-size:26px}
 </style>
 </head>
 <body>
@@ -1095,7 +1102,7 @@
         <article class="card-projeto" id="projeto-3">
           <div class="projeto-preview">
             <span class="selo-demo">Projeto conceitual</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-7-7 18-2.5-7.5L3 11z"></path></svg>
+            <button class="portfolio-zoom" type="button" aria-label="Ampliar anúncio de vestidos"><img src="anuncio-vestidos-web.jpg" alt="Anúncio promocional de vestidos femininos"></button>
           </div>
           <div class="projeto-info">
             <span class="projeto-categoria">Marketing Digital</span>
@@ -1113,7 +1120,7 @@
         <article class="card-projeto" id="projeto-4">
           <div class="projeto-preview">
             <span class="selo-demo">Projeto conceitual</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <button class="portfolio-zoom" type="button" aria-label="Ampliar perfil de restaurante"><img src="perfil-restaurante-web.jpg" alt="Perfil de restaurante com fotos de pratos e do ambiente"></button>
           </div>
           <div class="projeto-info">
             <span class="projeto-categoria">SEO Local</span>
@@ -1281,6 +1288,10 @@
   </div>
 </footer>
 
+<div class="portfolio-lightbox" id="portfolioLightbox" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+  <button class="portfolio-lightbox-fechar" type="button" aria-label="Fechar imagem">&times;</button>
+  <img src="" alt="">
+</div>
 <script>
   // ===================== MENU MOBILE =====================
   const menuToggle = document.getElementById('menuToggle');
@@ -1384,6 +1395,15 @@
     }
   });
 
+    const portfolioLightbox=document.getElementById('portfolioLightbox');
+  const lightboxImagem=portfolioLightbox.querySelector('img');
+  const fecharLightbox=()=>{portfolioLightbox.classList.remove('aberto');document.body.style.overflow='';};
+  document.querySelectorAll('.portfolio-zoom').forEach(botao=>botao.addEventListener('click',()=>{
+    const imagem=botao.querySelector('img'); lightboxImagem.src=imagem.src; lightboxImagem.alt=imagem.alt;
+    portfolioLightbox.classList.add('aberto'); document.body.style.overflow='hidden';
+  }));
+  portfolioLightbox.addEventListener('click',e=>{if(e.target===portfolioLightbox||e.target.closest('.portfolio-lightbox-fechar'))fecharLightbox();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')fecharLightbox();});
   // ===================== BOTÕES DE PROJETO SEM LINK DEFINIDO =====================
   // Enquanto você não tiver os links reais dos projetos, estes botões
   // avisam o visitante em vez de simular um link quebrado ("#").
